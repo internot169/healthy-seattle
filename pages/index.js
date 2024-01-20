@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState} from 'react';
 
 
 export async function GET(){
@@ -9,14 +9,35 @@ export async function GET(){
   const res = await fetch(url);
   const data = await res.json();
 
-  console.log(data);
   return Response.json({ data })
 }
 
+export function Data() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    GET();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  console.log(data);
+  return (<h1>{data[Data][0][sample_measurement]}</h1>)
+}
+
 export default function Home() {
-  GET();
+  
   return (
     <div className={styles.container}>
+      
       <Head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -32,6 +53,7 @@ export default function Home() {
       </Head>
 
       <main>
+        <Data></Data>
         <div class="container-fluid text-white p-3">
           <nav class="navbar navbar-expand-sm navbar-light rounded p-0 w-75 m-auto">
             <div class="container-fluid justify-content-center">
@@ -115,16 +137,6 @@ export default function Home() {
         </div>
       </main>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
-      </footer>
 
       <style jsx>{`
         main {
@@ -201,3 +213,5 @@ export default function Home() {
     </div>
   );
 }
+
+GET();
