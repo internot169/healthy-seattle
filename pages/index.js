@@ -1,49 +1,72 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
+import Calculations from "../components/climatecalculations.js";
+import { FormEvent } from 'react';
 
 export default function Home() {
-  const [showPosts, setShowPosts] = useState()
+  const [showPosts, setShowPosts] = useState();
 
-  let finalHTML
-  function pullJson(){
-    finalHTML = pull(88101, 20230901, 20230930, "PM 2.5")
-    finalHTML += pull(42101, 20230901, 20230930, "Carbon Monoxide")
-    finalHTML += pull(42401, 20230901, 20230930, "Sulfur Dioxide")
-    finalHTML += pull(42602, 20230901, 20230930, "Nitrogen Dioxide")
-    finalHTML += pull(44201, 20230901, 20230930, "Ozone")
-    finalHTML += pull(14129, 20230901, 20230930, "Lead (TSP) LC")
+  let finalHTML;
+  function pullJson() {
+    finalHTML = pull(88101, 20230901, 20230930, "PM 2.5");
+    finalHTML += pull(42101, 20230901, 20230930, "Carbon Monoxide");
+    finalHTML += pull(42401, 20230901, 20230930, "Sulfur Dioxide");
+    finalHTML += pull(42602, 20230901, 20230930, "Nitrogen Dioxide");
+    finalHTML += pull(44201, 20230901, 20230930, "Ozone");
+    finalHTML += pull(14129, 20230901, 20230930, "Lead (TSP) LC");
     setShowPosts(finalHTML);
   }
 
-  let displayData 
+  let displayData;
   function pull(param, bdate, edate, paramText) {
-    const apiUrl ="https://aqs.epa.gov/data/api/sampleData/byCounty?email=rli@eastsideprep.org&key=amberram68&param=" + param + "&bdate=" + bdate + "&edate=" + edate + "&state=53&county=033";
+    const apiUrl =
+      "https://aqs.epa.gov/data/api/sampleData/byCounty?email=rli@eastsideprep.org&key=amberram68&param=" +
+      param +
+      "&bdate=" +
+      bdate +
+      "&edate=" +
+      edate +
+      "&state=53&county=033";
     fetch(apiUrl)
-      .then(response => response.json())
-      .then(
-        responseData => {
-            const data = responseData['Data'][responseData['Data'].length - 1];
-            if (data == null){
-              return;
-            }
-            var cleanData = {
-              'date_of_last_change': data['date_local'],
-              'time_local': data['time_local'],
-              'parameter': paramText,
-              'sample_measurement': data['sample_measurement'],
-              'date_of_last_change': data['date_of_last_change']
-            }
-            displayData = <p key={cleanData['date_of_last_change'] + cleanData['time_local']}>{ cleanData['parameter'] + ": " +  cleanData['sample_measurement'] + " (" + cleanData['date_of_last_change'] + ")" }</p>
-            return displayData;
-          }
-      )
+      .then((response) => response.json())
+      .then((responseData) => {
+        const data = responseData["Data"][responseData["Data"].length - 1];
+        if (data == null) {
+          return;
+        }
+        var cleanData = {
+          date_of_last_change: data["date_local"],
+          time_local: data["time_local"],
+          parameter: paramText,
+          sample_measurement: data["sample_measurement"],
+          date_of_last_change: data["date_of_last_change"],
+        };
+        displayData = (
+          <p key={cleanData["date_of_last_change"] + cleanData["time_local"]}>
+            {cleanData["parameter"] +
+              ": " +
+              cleanData["sample_measurement"] +
+              " (" +
+              cleanData["date_of_last_change"] +
+              ")"}
+          </p>
+        );
+        return displayData;
+      });
+  }
+
+  async function getkWh(event) {
+    event.preventDefault()
+    
+    const formData = new FormData(event.target)
+    console.log(formData.kWh)
   }
 
   useEffect(() => {
-    pullJson()
-  }, [])
-  
+    pullJson();
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -95,9 +118,9 @@ export default function Home() {
         </div>
 
         <br />
-        
+
         <h3> Last Measured Stats: </h3>
-        
+
         {showPosts}
 
         <br />
@@ -107,10 +130,12 @@ export default function Home() {
         <div class="container">
           <div class="row">
             <div class="col-md">
-              <h2 class="text-center"> About </h2>
-              <p>
-              This website aims to show Seattleites the benefits of sustainability. We use the EPA's <a href="https://aqs.epa.gov/aqsweb/documents/data_api.html">AQS API</a> to get access to accurate air quality data. Currently, we support King County data through the end of 2023 (as the AQS has not yet been updated for 2024). We also use the <a href="https://www.climatiq.io/">ClimateIQ API</a> for carbon emission calculations.
-              </p>
+              <h2 class="text-center"> Your Impact </h2>
+                <p>Find the amount of kWh you use per month using this <a href="https://www.saveonenergy.com/resources/energy-consumption/">link</a>. Then, submit it below to get the amount of carbon emissions you generated.</p>
+                <form action={getkWh}>
+                  <input name="kWh" type="text"></input>
+                  <button type="submit">Submit</button>
+                </form>
             </div>
             <div class="col-md">
               <h2 class="text-center"> Take Action </h2>
@@ -123,32 +148,42 @@ export default function Home() {
                 <li>Reduce, reuse, repair and recycle</li>
               </ul>
               <p>
-                Recommendations from the <a href="https://www.un.org/en/actnow/ten-actions">UN sustainability resource</a>.
+                Recommendations from the{" "}
+                <a href="https://www.un.org/en/actnow/ten-actions">
+                  UN sustainability resource
+                </a>
+                .
               </p>
             </div>
             <div class="col-md">
               <h2 class="text-center"> Preserving the Planet </h2>
               <p>
-              Sustainability is our commitment to preserving the delicate balance of our planet. By adopting eco-friendly practices, we contribute to the conservation of natural resources, protect biodiversity, and mitigate the impact of climate change. By making sustainable choices, we ensure a healthier and more vibrant Earth for generations to come.
+                Sustainability is our commitment to preserving the delicate
+                balance of our planet. By adopting eco-friendly practices, we
+                contribute to the conservation of natural resources, protect
+                biodiversity, and mitigate the impact of climate change. By
+                making sustainable choices, we ensure a healthier and more
+                vibrant Earth for generations to come.
               </p>
             </div>
           </div>
-        </div>
-
-        <br />
-        <br />
-        <br />
-
-        <div class="container-fluid p-3 importantbox rounded-5 m-auto">
-          <h1 class="p-3">Why Be Sustainable?</h1>
-          <p>
-            Sustainability has many benefits, both for you and for people around
-            you.
-          </p>
-          <h2>How does it benefit me?</h2>
-          <p>eee</p>
-          <h2>How does it benefit others?</h2>
-          <p>by deezing their nuts</p>
+          <div class="row">
+            <div class="col-md">
+              <h2 class="text-center"> About </h2>
+              <p>
+                This website aims to show Seattleites the benefits of
+                sustainability. We use the EPA's{" "}
+                <a href="https://aqs.epa.gov/aqsweb/documents/data_api.html">
+                  AQS API
+                </a>{" "}
+                to get access to accurate air quality data. Currently, we
+                support King County data through the end of 2023 (as the AQS has
+                not yet been updated for 2024). We also use the{" "}
+                <a href="https://www.climatiq.io/">ClimateIQ API</a> for carbon
+                emission calculations.
+              </p>
+            </div>
+          </div>
         </div>
       </main>
 
