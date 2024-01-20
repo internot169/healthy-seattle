@@ -86,24 +86,38 @@ export default function Home() {
         <br />
         <br />
 
+        <div>
+          <h2 class="list-subtitle">
+            Brightening the world, one cut at a time
+          </h2>
+        </div>
+
         <div class="container">
           <div class="row">
             <div class="col-md">
-              <h2 class="text-center"> About </h2>
+              <h2 class="text-center"> Functional and Pleasing </h2>
               <p>
-                This website aims to show Seattlites the benefits of sustainability. We use the EPA's <a href="https://aqs.epa.gov/aqsweb/documents/data_api.html">AQS API</a> to get access to accurate air quality data. Currently, we support King County data through the end of 2023 (as the AQS has not yet been updated for 2024). We also use the <a href="https://www.climatiq.io/">ClimateIQ API</a> for carbon emission calculations.
+                Our items are always either functional or pleasing to the eye -
+                often both. We strive to solve problems that you have, and
+                making it look good while doing it.
               </p>
-              <h2 class="text-center"> Take Action</h2>
+            </div>
+            <div class="col-md">
+              <h2 class="text-center"> Constantly Innovating </h2>
               <p>
-
+                {" "}
+                We are constantly working on new ideas and new products,
+                innovating ways to change the way you store items and decorate
+                workspaces{" "}
               </p>
-              <h2 class="text-center"> Preserving the Planet</h2>
+            </div>
+            <div class="col-md">
+              <h2 class="text-center"> Impacting the World </h2>
               <p>
-                Sustainability is our commitment to preserving the delicate balance of our planet. By adopting eco-friendly practices, we contribute to the conservation of natural resources, protect biodiversity, and mitigate the impact of climate change. By making sustainable choices, we ensure a healthier and more vibrant Earth for generations to come.
-              </p>
-              <h2 class="text-center"> Social Responsibility </h2>
-              <p>
-                Being sustainable goes hand in hand with social responsibility. By choosing sustainable products and practices, we support ethical labor practices and fair trade. This helps uplift communities, promote inclusivity, and create a more equitable global society. Our commitment to social responsibility extends to fostering positive relationships with local communities and promoting economic development.
+                We donate all of our "profits" - either to the school where we
+                come from, giving back to our roots, or to local charities that
+                benefit the lives of others. Our sustainable products also help
+                with bettering the planet.
               </p>
             </div>
           </div>
@@ -189,23 +203,19 @@ export default function Home() {
           box-sizing: border-box;
         }
         .importantbox {
-          background-color: #66493a;
-          color: #ffc18c;
+          background-color: #89CFF0;
           width: 90%;
         }
 
         .importantbox > h1 {
-          color: #d73502;
           font-size: 50px;
         }
 
         .importantbox > h3 {
-          color: #ffc18c;
           font-size: 35px;
         }
 
         .importantbox > p {
-          color: #ffc18c;
           font-size: 30px;
           padding: 10px;
         }
