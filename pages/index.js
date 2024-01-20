@@ -3,6 +3,29 @@ import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
 
 export default function Home() {
+  const [showPosts, setShowPosts] = useState()
+  const apiUrl =
+    "https://aqs.epa.gov/data/api/sampleData/byCounty?email=rli@eastsideprep.org&key=amberram68&param=88101&bdate=20230901&edate=20231101&state=53&county=033";
+
+  let displayData 
+  function pullJson() {
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(
+        responseData => {
+          const data = responseData['Data'][responseData['Data'].length - 1];
+          displayData = <p key={['date_local'] + data['time_local']}>{ data['parameter'] + ": " +  data['sample_measurement'] }</p>
+          console.log(responseData)
+          setShowPosts(displayData)
+      }
+    )
+    //return
+  }
+
+  useEffect(() => {
+    pullJson()
+  }, [])
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -20,9 +43,44 @@ export default function Home() {
       </Head>
 
       <main>
+        <div class="container-fluid text-white p-3">
+          <nav class="navbar navbar-expand-sm navbar-light rounded p-0 w-75 m-auto">
+            <div class="container-fluid justify-content-center">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">
+                    <h3>Home</h3>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="air">
+                    <h3>Air</h3>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="land">
+                    <h3>Land</h3>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="water">
+                    <h3>Water</h3>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+
         <div>
           <h1 class="text-center display-1 title m-4">Healthy Seattle</h1>
         </div>
+
+        <br />
+        
+        <h3> Current Stats: </h3>
+        
+        {showPosts}
 
         <br />
         <br />
@@ -110,10 +168,21 @@ export default function Home() {
         body {
           padding: 0;
           margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
+
+          /* FONT AND COLOR */
+          font-family: "blanket", sans-serif;
+          font-weight: 400;
+          font-style: normal;
+
           background-color: #40e0d0;
+        }
+        h1, h2, h3 {
+          /* FONT AND COLOR */
+          font-family: "lemongrass-script", sans-serif;
+          font-weight: 400;
+          font-style: normal;
+      
+          text-align: center;
         }
         * {
           box-sizing: border-box;
