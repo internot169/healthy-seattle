@@ -1,7 +1,20 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import React, { useEffect, useRef } from 'react';
+
+
+export async function GET(){
+  var url = 'https://aqs.epa.gov/data/api/sampleData/byCounty?email=rli@eastsideprep.org&key=amberram68&param=88101&bdate=20230901&edate=20231101&state=53&county=033'
+  
+  const res = await fetch(url);
+  const data = await res.json();
+
+  console.log(data);
+  return Response.json({ data })
+}
 
 export default function Home() {
+  GET();
   return (
     <div className={styles.container}>
       <Head>
