@@ -40,7 +40,9 @@ export default function Home() {
       )
   }
 
-  pullJson();
+  useEffect(() => {
+    pullJson()
+  }, [])
   
   return (
     <div className={styles.container}>
