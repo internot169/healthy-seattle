@@ -14,7 +14,7 @@ export default function Home() {
       .then(
         responseData => {
           const data = responseData['Data'][responseData['Data'].length - 1];
-          displayData = <p key={['date_local'] + data['time_local']}>{ data['parameter'] + ": " +  data['sample_measurement'] }</p>
+          displayData = <p key={['date_local'] + data['time_local']}>{ data['parameter'] + ": " +  data['sample_measurement'] + " (" + data['date_local'] + ")" }</p>
           console.log(responseData)
           setShowPosts(displayData)
       }
@@ -39,7 +39,7 @@ export default function Home() {
           rel="stylesheet"
         />
         <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="https://use.typekit.net/phg7nca.css" />
+        <link rel="stylesheet" href="https://use.typekit.net/dss6iov.css" />
       </Head>
 
       <main>
@@ -78,7 +78,7 @@ export default function Home() {
 
         <br />
         
-        <h3> Current Stats: </h3>
+        <h3> Last Measured Stats: </h3>
         
         {showPosts}
 
@@ -183,16 +183,17 @@ export default function Home() {
           padding: 0;
           margin: 0;
 
-          /* FONT AND COLOR */
-          font-family: "blanket", sans-serif;
-          font-weight: 400;
-          font-style: normal;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+
+          font-size: 20px;
 
           background-color: #40e0d0;
         }
         h1, h2, h3 {
           /* FONT AND COLOR */
-          font-family: "lemongrass-script", sans-serif;
+          font-family: "atocha", sans-serif;
           font-weight: 400;
           font-style: normal;
       
