@@ -1,43 +1,11 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import React, { useEffect, useState} from 'react';
-
-
-export async function GET(){
-  var url = 'https://aqs.epa.gov/data/api/sampleData/byCounty?email=rli@eastsideprep.org&key=amberram68&param=88101&bdate=20230901&edate=20231101&state=53&county=033'
-  
-  const res = await fetch(url);
-  const data = await res.json();
-
-  return Response.json({ data })
-}
-
-export function Data() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    GET();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  console.log(data);
-  return (<h1>{data[Data][0][sample_measurement]}</h1>)
-}
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import React, { useEffect, useState } from "react";
+import Data from "../components/Data";
 
 export default function Home() {
-  
   return (
     <div className={styles.container}>
-      
       <Head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -89,7 +57,7 @@ export default function Home() {
 
         <br />
         <br />
-        <br/>
+        <br />
 
         <div>
           <h2 class="list-subtitle">
@@ -130,7 +98,7 @@ export default function Home() {
 
         <br />
         <br />
-        <br/> 
+        <br />
 
         <div class="container-fluid p-3 importantbox rounded-5 m-auto">
           <h1 class="p-3">Why Be Sustainable?</h1>
@@ -144,7 +112,6 @@ export default function Home() {
           <p>by deezing their nuts</p>
         </div>
       </main>
-
 
       <style jsx>{`
         main {
@@ -221,5 +188,3 @@ export default function Home() {
     </div>
   );
 }
-
-GET();
