@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
 import Calculations from "../components/climatecalculations.js";
-import { FormEvent } from 'react';
+import { FormEvent } from "react";
 
 export default function Home() {
   const [showPosts, setShowPosts] = useState();
@@ -54,13 +54,6 @@ export default function Home() {
         );
         return displayData;
       });
-  }
-
-  async function getkWh(event) {
-    event.preventDefault()
-    
-    const formData = new FormData(event.target)
-    console.log(formData.kWh)
   }
 
   useEffect(() => {
@@ -131,11 +124,19 @@ export default function Home() {
           <div class="row">
             <div class="col-md">
               <h2 class="text-center"> Your Impact </h2>
-                <p>Find the amount of kWh you use per month using this <a href="https://www.saveonenergy.com/resources/energy-consumption/">link</a>. Then, submit it below to get the amount of carbon emissions you generated.</p>
-                <form action={getkWh}>
-                  <input name="kWh" type="text"></input>
-                  <button type="submit">Submit</button>
-                </form>
+              <p>
+                Find the amount of kWh you use per month using this{" "}
+                <a href="https://www.saveonenergy.com/resources/energy-consumption/">
+                  link
+                </a>
+                . Then, submit it below to get the amount of carbon emissions
+                you generated.
+              </p>
+              <form action={getkWh}>
+                <input name="kWh" type="text"></input>
+                <button type="submit">Submit</button>
+              </form>
+              <p>This is your result: WOULD BE A RESULT WITH CONTEXTUALIZATION</p>
             </div>
             <div class="col-md">
               <h2 class="text-center"> Take Action </h2>
