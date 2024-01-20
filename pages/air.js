@@ -1,6 +1,6 @@
-import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import React, { useEffect, useRef } from 'react';
+import Head from 'next/head';
 
 
 export async function GET(){
@@ -13,15 +13,14 @@ export async function GET(){
   return Response.json({ data })
 }
 
-export default function Home() {
-  GET();
+export default function FirstPost() {
   return (
     <div className={styles.container}>
       <Head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Home - Healthy Seattle</title>
+        <title>Atmosphere - Healthy Seattle</title>
         <link rel="shortcut icon" type="image/jpg" href="public/logo.png" />
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -30,7 +29,6 @@ export default function Home() {
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="https://use.typekit.net/phg7nca.css" />
       </Head>
-
       <main>
         <div class="container-fluid text-white p-3">
           <nav class="navbar navbar-expand-sm navbar-light rounded p-0 w-75 m-auto">
@@ -62,12 +60,12 @@ export default function Home() {
         </div>
 
         <div>
-          <h1 class="text-center display-1 title m-4">Healthy Seattle</h1>
+          <h1 class="text-center display-1 title m-4">Atmospheric Pollution</h1>
         </div>
 
         <br />
         <br />
-        <br/>
+        <br />
 
         <div>
           <h2 class="list-subtitle">
@@ -108,7 +106,7 @@ export default function Home() {
 
         <br />
         <br />
-        <br/> 
+        <br />
 
         <div class="container-fluid p-3 importantbox rounded-5 m-auto">
           <h1 class="p-3">Why Be Sustainable?</h1>
@@ -122,7 +120,6 @@ export default function Home() {
           <p>by deezing their nuts</p>
         </div>
       </main>
-
       <footer>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -133,7 +130,6 @@ export default function Home() {
           <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
         </a>
       </footer>
-
       <style jsx>{`
         main {
           padding: 5rem 0;
@@ -206,6 +202,7 @@ export default function Home() {
           padding: 10px;
         }
       `}</style>
+      ;
     </div>
   );
 }
