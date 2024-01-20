@@ -4,27 +4,43 @@ import React, { useEffect, useState } from "react";
 
 export default function Home() {
   const [showPosts, setShowPosts] = useState()
-  const apiUrl =
-    "https://aqs.epa.gov/data/api/sampleData/byCounty?email=rli@eastsideprep.org&key=amberram68&param=88101&bdate=20230901&edate=20231101&state=53&county=033";
+
+  let finalHTML
+  function pullJson(){
+    finalHTML = pull(88101, 20230901, 20230930, "PM 2.5")
+    finalHTML += pull(42101, 20230901, 20230930, "Carbon Monoxide")
+    finalHTML += pull(42401, 20230901, 20230930, "Sulfur Dioxide")
+    finalHTML += pull(42602, 20230901, 20230930, "Nitrogen Dioxide")
+    finalHTML += pull(44201, 20230901, 20230930, "Ozone")
+    finalHTML += pull(14129, 20230901, 20230930, "Lead (TSP) LC")
+    setShowPosts(finalHTML);
+  }
 
   let displayData 
-  function pullJson() {
+  function pull(param, bdate, edate, paramText) {
+    const apiUrl ="https://aqs.epa.gov/data/api/sampleData/byCounty?email=rli@eastsideprep.org&key=amberram68&param=" + param + "&bdate=" + bdate + "&edate=" + edate + "&state=53&county=033";
     fetch(apiUrl)
       .then(response => response.json())
       .then(
         responseData => {
-          const data = responseData['Data'][responseData['Data'].length - 1];
-          displayData = <p key={['date_local'] + data['time_local']}>{ data['parameter'] + ": " +  data['sample_measurement'] + " (" + data['date_local'] + ")" }</p>
-          console.log(responseData)
-          setShowPosts(displayData)
-      }
-    )
-    //return
+            const data = responseData['Data'][responseData['Data'].length - 1];
+            if (data == null){
+              return;
+            }
+            var cleanData = {
+              'date_of_last_change': data['date_local'],
+              'time_local': data['time_local'],
+              'parameter': paramText,
+              'sample_measurement': data['sample_measurement'],
+              'date_of_last_change': data['date_of_last_change']
+            }
+            displayData = <p key={cleanData['date_of_last_change'] + cleanData['time_local']}>{ cleanData['parameter'] + ": " +  cleanData['sample_measurement'] + " (" + cleanData['date_of_last_change'] + ")" }</p>
+            return displayData;
+          }
+      )
   }
 
-  useEffect(() => {
-    pullJson()
-  }, [])
+  pullJson();
   
   return (
     <div className={styles.container}>
