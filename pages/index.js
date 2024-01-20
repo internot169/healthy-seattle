@@ -104,38 +104,32 @@ export default function Home() {
         <br />
         <br />
 
-        <div>
-          <h2 class="list-subtitle">
-            Brightening the world, one cut at a time
-          </h2>
-        </div>
-
         <div class="container">
           <div class="row">
             <div class="col-md">
-              <h2 class="text-center"> Functional and Pleasing </h2>
+              <h2 class="text-center"> About </h2>
               <p>
-                Our items are always either functional or pleasing to the eye -
-                often both. We strive to solve problems that you have, and
-                making it look good while doing it.
+              This website aims to show Seattleites the benefits of sustainability. We use the EPA's <a href="https://aqs.epa.gov/aqsweb/documents/data_api.html">AQS API</a> to get access to accurate air quality data. Currently, we support King County data through the end of 2023 (as the AQS has not yet been updated for 2024). We also use the <a href="https://www.climatiq.io/">ClimateIQ API</a> for carbon emission calculations.
               </p>
             </div>
             <div class="col-md">
-              <h2 class="text-center"> Constantly Innovating </h2>
+              <h2 class="text-center"> Take Action </h2>
+              <ul>
+                <li>Save energy at home</li>
+                <li>Change your home's source of energy</li>
+                <li>Walk, bike or take public transport</li>
+                <li>Switch to an electric vehicle</li>
+                <li>Consider your travel</li>
+                <li>Reduce, reuse, repair and recycle</li>
+              </ul>
               <p>
-                {" "}
-                We are constantly working on new ideas and new products,
-                innovating ways to change the way you store items and decorate
-                workspaces{" "}
+                Recommendations from the <a href="https://www.un.org/en/actnow/ten-actions">UN sustainability resource</a>.
               </p>
             </div>
             <div class="col-md">
-              <h2 class="text-center"> Impacting the World </h2>
+              <h2 class="text-center"> Preserving the Planet </h2>
               <p>
-                We donate all of our "profits" - either to the school where we
-                come from, giving back to our roots, or to local charities that
-                benefit the lives of others. Our sustainable products also help
-                with bettering the planet.
+              Sustainability is our commitment to preserving the delicate balance of our planet. By adopting eco-friendly practices, we contribute to the conservation of natural resources, protect biodiversity, and mitigate the impact of climate change. By making sustainable choices, we ensure a healthier and more vibrant Earth for generations to come.
               </p>
             </div>
           </div>
